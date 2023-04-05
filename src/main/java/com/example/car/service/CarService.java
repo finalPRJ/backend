@@ -16,7 +16,7 @@ public interface CarService {
     default Car dtoToEntity(CarDTO dto) {
         Car entity = Car.builder()
                 .cno(dto.getCno())
-                .plattform(dto.getPlattform())
+                .platform(dto.getPlatform())
                 .tag(dto.getTag())
                 .type(dto.getType())
                 .brand(dto.getBrand())
@@ -38,7 +38,7 @@ public interface CarService {
     default CarDTO entityToDto(Car entity) {
         CarDTO dto = CarDTO.builder()
                 .cno(entity.getCno())
-                .plattform(entity.getPlattform())
+                .platform(entity.getPlatform())
                 .tag(entity.getTag())
                 .type(entity.getType())
                 .brand(entity.getBrand())

@@ -24,27 +24,4 @@ public class CarServiceTest {
         }
     }
 
-    @Test
-    public void testSearch() {
-        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-                .page(1)
-                .size(20)
-                .type("p")
-                .keyword("K-Car")
-                .build();
-
-        PageResultDTO<CarDTO, Car> resultDTO = service.getList(pageRequestDTO);
-
-        System.out.println("PREV: "+ resultDTO.isPrev());
-        System.out.println("NEXT: "+resultDTO.isNext());
-        System.out.println("TOTAL: "+resultDTO.getTotalPage());
-
-        System.out.println("=========================================");
-        for(CarDTO carDTO : resultDTO.getDtoList()) {
-            System.out.println(carDTO);
-        }
-
-        System.out.println("=========================================");
-        resultDTO.getPageList().forEach(i -> System.out.println(i));
-    }
 }

@@ -46,8 +46,8 @@ public class CarServicelmpl implements CarService {
         BooleanBuilder conditionBuilder = new BooleanBuilder();
         for(int i =0; i< type.length; i++) {
 
-            if (type[i].contains("plattform")) {     // 플랫폼
-                conditionBuilder.and(qCar.plattform.contains(keyword[i]));
+            if (type[i].contains("platform")) {     // 플랫폼
+                conditionBuilder.and(qCar.platform.contains(keyword[i]));
             }
             if (type[i].contains("tag")) {     // 태그(국산/수입)
                 conditionBuilder.and(qCar.tag.contains(keyword[i]));
@@ -82,6 +82,7 @@ public class CarServicelmpl implements CarService {
                 String[] keyword1 = StringUtils.split(keyword[i], ",");
                 Short keyword1_1 = Short.parseShort(keyword1[0].replace("년", ""));
                 Short keyword2_1 = Short.parseShort(keyword1[1].replace("년", ""));
+
                 conditionBuilder.and(qCar.year.between(keyword1_1, keyword2_1));
             }
         }
