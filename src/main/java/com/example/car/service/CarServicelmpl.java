@@ -38,7 +38,7 @@ public class CarServicelmpl implements CarService {
 
         booleanBuilder.and(expression1);
 
-        if(type[0] == null || type[0].trim().length() == 0) {// 검색 조건이 없는 경우
+        if(type == null || type[0].trim().length() == 0) {// 검색 조건이 없는 경우
             return booleanBuilder;
         }
 

@@ -5,7 +5,6 @@ import com.example.car.dto.PageRequestDTO;
 import com.example.car.dto.PageResultDTO;
 import com.example.car.entity.Car;
 import com.example.car.service.CarService;
-import com.example.car.service.CarServicelmpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

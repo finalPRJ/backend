@@ -1,11 +1,6 @@
 package com.example.car.dto;
 
 import lombok.*;
-import org.springframework.util.StringUtils;
-
-import javax.persistence.Column;
-import java.sql.Date;
-import java.time.Year;
 
 @Builder
 @NoArgsConstructor
