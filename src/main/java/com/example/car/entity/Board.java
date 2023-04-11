@@ -9,6 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Table(name = "board")
 public class Board extends BaseEntity {
     
@@ -18,7 +19,7 @@ public class Board extends BaseEntity {
     @Column(length = 300, nullable = false)
     private String title; // 게시글 제목
     private String content; // 게시글 내용
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member writer; // 게시글 작성자
 }

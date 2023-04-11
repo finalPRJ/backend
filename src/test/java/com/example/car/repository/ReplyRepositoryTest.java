@@ -7,6 +7,7 @@ import com.example.car.entity.Board;
 import com.example.car.entity.Member;
 import com.example.car.entity.Reply;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.stream.IntStream;
 @SpringBootTest
@@ -33,6 +34,7 @@ public class ReplyRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void readReply1() {
         Optional<Reply> result = replyRepository.findById(7);
 
