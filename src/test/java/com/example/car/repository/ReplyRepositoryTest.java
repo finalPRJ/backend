@@ -7,6 +7,7 @@ import com.example.car.entity.Board;
 import com.example.car.entity.Member;
 import com.example.car.entity.Reply;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
 @SpringBootTest
 public class ReplyRepositoryTest {
@@ -30,4 +31,15 @@ public class ReplyRepositoryTest {
             replyRepository.save(reply);
         });
     }
+
+    @Test
+    public void readReply1() {
+        Optional<Reply> result = replyRepository.findById(7);
+
+        Reply reply = result.get();
+
+        System.out.println(reply);
+        System.out.println(reply.getBoard());
+    }
+
 }

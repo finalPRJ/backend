@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.car.entity.Board;
 import com.example.car.entity.Member;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -30,6 +31,15 @@ public class BoardRepositoryTest {
         });
     }
 
+    @Test
+    public void testRead1() {
+        Optional<Board> result = boardRepository.findById(10);
+
+        Board board = result.get();
+
+        System.out.println(board);
+        System.out.println(board.getWriter());
+    }
 
 
 }
