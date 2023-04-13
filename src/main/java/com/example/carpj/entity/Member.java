@@ -60,12 +60,12 @@ public class Member implements UserDetails {
 
     @Override
     public String getPassword() {
-        return id;
+        return pw;
     }
 
     @Override
     public String getUsername() {
-        return pw;
+        return id;
     }
 
     @Override
