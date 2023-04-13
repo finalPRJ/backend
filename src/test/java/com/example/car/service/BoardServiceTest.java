@@ -28,8 +28,30 @@ public class BoardServiceTest {
         PageRequestDTO pageRequestDTO = new PageRequestDTO();
         PageResultDTO<BoardDTO, Object[]> result = boardService.getList(pageRequestDTO);
 
-        for (BoardDTO boardDTO : result.getDtoList()) {
+        for(BoardDTO boardDTO : result.getDtoList()) {
             System.out.println(boardDTO);
         }
+    }
+
+    @Test
+    public void testGet() {
+        Integer bno = 10;
+        BoardDTO boardDTO = boardService.get(bno);
+        System.out.println(boardDTO);
+    }
+
+    // 삭제 처리 테스트 진행 안함
+
+
+
+    @Test
+    public void testModify() {
+        BoardDTO boardDTO = BoardDTO.builder()
+                .bno(21)
+                .title("수정 확인")
+                .content("수정 확인")
+                .build();
+
+        boardService.modify(boardDTO);
     }
 }

@@ -10,6 +10,12 @@ public interface BoardService {
     Integer register(BoardDTO dto);
     // 목록 처리
     PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
+    // 조회 처리
+    BoardDTO get(Integer bno);
+    // 삭제 처리
+    void removeWithReplies(Integer bno);
+    // 수정 처리
+    void modify(BoardDTO boardDTO);
 
     default Board dtoToEntity(BoardDTO dto){
         Member member = Member.builder().id(dto.getWriterId()).build();

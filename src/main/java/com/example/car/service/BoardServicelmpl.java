@@ -1,5 +1,6 @@
 package com.example.car.service;
 
+import com.example.car.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.example.car.entity.Member;
 import com.example.car.entity.Board;
 import com.example.car.repository.BoardRepository;
 
+import javax.transaction.Transactional;
 import java.util.function.Function;
 
 @Service
@@ -19,6 +21,7 @@ import java.util.function.Function;
 @Log4j2
 public class BoardServicelmpl implements BoardService {
     private final BoardRepository repository;
+    private final ReplyRepository replyRepository;
 
     @Override
     public Integer register(BoardDTO dto) {
@@ -39,5 +42,29 @@ public class BoardServicelmpl implements BoardService {
         return new PageResultDTO<>(result, fn);
     }
 
+    @Override
+    public BoardDTO get(Integer bno) {
+        Object result = repository.getBoardByBno(bno);
+        Object[] arr = (Object[])result;
+        return entityToDTO((Board)arr[0], (Member)arr[1], (Long)arr[2]);
+    }
+
+    @Transactional
+    @Override
+    public void removeWithReplies(Integer bno) {
+        replyRepository.deleteByBno(bno);
+        repository.deleteById(bno);
+    }
+
+    @Transactional
+    @Override
+    public void modify(BoardDTO boardDTO) {
+        Board board = repository.getReferenceById(boardDTO.getBno());
+
+        board.changeTitle(boardDTO.getTitle());
+        board.changeContent(boardDTO.getContent());
+
+        repository.save(board);
+    }
 
 }

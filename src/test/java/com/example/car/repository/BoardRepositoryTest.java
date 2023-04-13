@@ -1,5 +1,9 @@
 package com.example.car.repository;
 
+import com.example.car.dto.BoardDTO;
+import com.example.car.dto.PageRequestDTO;
+import com.example.car.dto.PageResultDTO;
+import com.example.car.service.BoardService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +25,8 @@ public class BoardRepositoryTest {
 
     @Autowired
     private BoardRepository boardRepository;
+    @Autowired
+    private BoardService boardService;
 
     @Test
     public void insertBoard() {
@@ -85,4 +91,5 @@ public class BoardRepositoryTest {
         Object[] arr = (Object[])result;
         System.out.println(Arrays.toString(arr));
     }
+
 }
