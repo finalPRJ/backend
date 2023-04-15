@@ -22,7 +22,7 @@ import java.util.function.Function;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class CarServicelmpl implements CarService {
+public class CarServiceImpl implements CarService {
 
     private final CarRepository repository;
 
