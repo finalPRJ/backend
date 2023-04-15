@@ -33,4 +33,50 @@ public class BoardController {
             System.out.println(boardDTO);
         }
     }
+
+    @GetMapping("/register")
+    public void register() {
+        log.info("register get...");
+    }
+
+    @PostMapping("/register")
+    public String registerPost(BoardDTO dto, RedirectAttributes redirectAttributes) {
+        log.info("dto..."+ dto);
+        // 새로 추가된 엔티티의 번호
+        Integer bno = boardService.register(dto);
+        log.info("BNO: "+ bno);
+        redirectAttributes.addFlashAttribute("msg", bno);
+        return "redirect:/board/list";
+    }
+
+    @GetMapping({"/read", "/modify"})
+    public void read(@ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO, Integer bno, Model model) {
+        log.info("bno: "+ bno);
+        BoardDTO boardDTO = boardService.get(bno);
+        log.info(boardDTO);
+        model.addAttribute("dto", boardDTO);
+    }
+
+    @PostMapping("/remove")
+    public String remove(Integer bno, RedirectAttributes redirectAttributes) {
+        log.info("bno: "+ bno);
+        boardService.removeWithReplies(bno);
+        redirectAttributes.addFlashAttribute("msg", bno);
+        return "redirect:/board/list";
+    }
+
+    @PostMapping("/modify")
+    public String modify(BoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
+                         RedirectAttributes redirectAttributes) {
+        log.info("post modify........................");
+        log.info("dto: "+ dto);
+
+        redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
+        redirectAttributes.addAttribute("type", pageRequestDTO.getType());
+        redirectAttributes.addAttribute("keyword", pageRequestDTO.getKeyword());
+
+        redirectAttributes.addAttribute("bno", dto.getBno());
+        return "redirect:/board/read";
+    }
+
 }

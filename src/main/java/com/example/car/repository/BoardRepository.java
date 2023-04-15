@@ -1,5 +1,6 @@
 package com.example.car.repository;
 
+import com.example.car.repository.search.SearchBoardRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +10,7 @@ import com.example.car.entity.Board;
 
 import java.util.List;
 
-public interface BoardRepository extends JpaRepository<Board, Integer> {
+public interface BoardRepository extends JpaRepository<Board, Integer>, SearchBoardRepository {
     // test 폴더에서 테스트 진행 (성공)
     @Query("select b, w from Board b  left join b.writer w where b.bno =:bno")
     Object getBoardWithWriter(@Param("bno") Integer bno);
