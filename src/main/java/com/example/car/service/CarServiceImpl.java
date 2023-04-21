@@ -64,27 +64,47 @@ public class CarServiceImpl implements CarService {
             if (type[i].contains("oil")) {     // 연료 타입 (테스트: 성공)
                 conditionBuilder.and(qCar.oil.contains(keyword[i]));
             }
-            // 범위 지정 검색, 다른 조건과 혼합해서 하는건 가능하지만 단일 조건으로 검색이 안됨
             if (type[i].contains("price")) {     // 가격
-                String[] keyword1 = StringUtils.split(keyword[i], ",");
-                int keyword1_1 = Integer.parseInt(keyword1[0].replace("만원", "0000"));
-                int keyword2_1 = Integer.parseInt(keyword1[1].replace("만원", "0000"));
+                if (type.length == 1) { //keyword=[1200만원, 1600만원]
+                    int keyword1_1 = Integer.parseInt(keyword[0].replace("만원", "0000"));
+                    int keyword2_1 = Integer.parseInt(keyword[1].replace("만원", "0000"));
 
-                conditionBuilder.and(qCar.pricer.between(keyword1_1, keyword2_1));
+                    conditionBuilder.and(qCar.pricer.between(keyword1_1, keyword2_1));
+                } else if (type.length > 1){ //keyword=[K-Car, 1200만원,1600만원]
+                    String[] keyword1 = StringUtils.split(keyword[i], ",");
+                    int keyword1_1 = Integer.parseInt(keyword1[0].replace("만원", "0000"));
+                    int keyword2_1 = Integer.parseInt(keyword1[1].replace("만원", "0000"));
+
+                    conditionBuilder.and(qCar.pricer.between(keyword1_1, keyword2_1));
+                }
             }
             if (type[i].contains("km")) {       // 주행거리
-                String[] keyword1 = StringUtils.split(keyword[i], ",");
-                int keyword1_1 = Integer.parseInt(keyword1[0].replace("km", ""));
-                int keyword2_1 = Integer.parseInt(keyword1[1].replace("km", ""));
+                if (type.length == 1) {
+                    int keyword1_1 = Integer.parseInt(keyword[0].replace("km", ""));
+                    int keyword2_1 = Integer.parseInt(keyword[1].replace("km", ""));
 
-                conditionBuilder.and(qCar.kmr.between(keyword1_1, keyword2_1));
+                    conditionBuilder.and(qCar.kmr.between(keyword1_1, keyword2_1));
+                } else if (type.length > 1){
+                    String[] keyword1 = StringUtils.split(keyword[i], ",");
+                    int keyword1_1 = Integer.parseInt(keyword1[0].replace("km", ""));
+                    int keyword2_1 = Integer.parseInt(keyword1[1].replace("km", ""));
+
+                    conditionBuilder.and(qCar.kmr.between(keyword1_1, keyword2_1));
+                }
             }
-            if (type[i].contains("year")) {     // 연식 
-                String[] keyword1 = StringUtils.split(keyword[i], ",");
-                Short keyword1_1 = Short.parseShort(keyword1[0].replace("년", ""));
-                Short keyword2_1 = Short.parseShort(keyword1[1].replace("년", ""));
+            if (type[i].contains("year")) {     // 연식
+                if (type.length == 1) {
+                    int keyword1_1 = Integer.parseInt(keyword[0].replace("년", ""));
+                    int keyword2_1 = Integer.parseInt(keyword[1].replace("년", ""));
 
-                conditionBuilder.and(qCar.year.between(keyword1_1, keyword2_1));
+                    conditionBuilder.and(qCar.year.between(keyword1_1, keyword2_1));
+                } else if (type.length > 1){
+                    String[] keyword1 = StringUtils.split(keyword[i], ",");
+                    int keyword1_1 = Integer.parseInt(keyword1[0].replace("년", ""));
+                    int keyword2_1 = Integer.parseInt(keyword1[1].replace("년", ""));
+
+                    conditionBuilder.and(qCar.year.between(keyword1_1, keyword2_1));
+                }
             }
         }
 
