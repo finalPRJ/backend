@@ -76,13 +76,13 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
 
             for (String t : typeArr) {
                 switch (t) {
-                    case "t":
+                    case "t":       //(테스트: 성공)
                         conditionBuilder.or(board.title.contains(keyword));
                         break;
-                    case "w":
+                    case "w":       //(테스트: 성공)
                         conditionBuilder.or(member.nickname.contains(keyword));
                         break;
-                    case "c":
+                    case "c":       //(테스트: 성공)
                         conditionBuilder.or(board.content.contains(keyword));
                         break;
                 }

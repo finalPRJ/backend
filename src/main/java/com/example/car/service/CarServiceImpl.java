@@ -46,39 +46,39 @@ public class CarServiceImpl implements CarService {
         BooleanBuilder conditionBuilder = new BooleanBuilder();
         for(int i =0; i< type.length; i++) {
 
-            if (type[i].contains("platform")) {     // 플랫폼
+            if (type[i].contains("platform")) {     // 플랫폼  (테스트: 성공)
                 conditionBuilder.and(qCar.platform.contains(keyword[i]));
             }
-            if (type[i].contains("tag")) {     // 태그(국산/수입)
+            if (type[i].contains("tag")) {     // 태그(국산/수입) (테스트: 성공)
                 conditionBuilder.and(qCar.tag.contains(keyword[i]));
             }
-            if (type[i].contains("type")) {     // 차종
+            if (type[i].contains("type")) {     // 차종 (테스트: 성공)
                 conditionBuilder.and(qCar.type.contains(keyword[i]));
             }
-            if (type[i].contains("brand")) {     // 브랜드
+            if (type[i].contains("brand")) {     // 브랜드 (테스트: 성공)
                 conditionBuilder.and(qCar.brand.contains(keyword[i]));
             }
-            if (type[i].contains("model")) {     // 모델 이름
+            if (type[i].contains("model")) {     // 모델 이름 (테스트: 성공)
                 conditionBuilder.and(qCar.model.contains(keyword[i]));
             }
-            if (type[i].contains("oiltype")) {     // 연료 타입
-                conditionBuilder.and(qCar.oiltype.contains(keyword[i]));
+            if (type[i].contains("oil")) {     // 연료 타입 (테스트: 성공)
+                conditionBuilder.and(qCar.oil.contains(keyword[i]));
             }
             if (type[i].contains("price")) {     // 가격
                 String[] keyword1 = StringUtils.split(keyword[i], ",");
-                Integer keyword1_1 = Integer.parseInt(keyword1[0].replace("만원", "0000"));
-                Integer keyword2_1 = Integer.parseInt(keyword1[1].replace("만원", "0000"));
+                int keyword1_1 = Integer.parseInt(keyword1[0].replace("만원", "0000"));
+                int keyword2_1 = Integer.parseInt(keyword1[1].replace("만원", "0000"));
 
-                conditionBuilder.and(qCar.rprice.between(keyword1_1, keyword2_1));
+                conditionBuilder.and(qCar.pricer.between(keyword1_1, keyword2_1));
             }
             if (type[i].contains("km")) {       // 주행거리
                 String[] keyword1 = StringUtils.split(keyword[i], ",");
-                Integer keyword1_1 = Integer.parseInt(keyword1[0].replace("km", ""));
-                Integer keyword2_1 = Integer.parseInt(keyword1[1].replace("km", ""));
+                int keyword1_1 = Integer.parseInt(keyword1[0].replace("km", ""));
+                int keyword2_1 = Integer.parseInt(keyword1[1].replace("km", ""));
 
-                conditionBuilder.and(qCar.rkm.between(keyword1_1, keyword2_1));
+                conditionBuilder.and(qCar.kmr.between(keyword1_1, keyword2_1));
             }
-            if (type[i].contains("year")) {     // 연식
+            if (type[i].contains("year")) {     // 연식 (테스트: 성공)
                 String[] keyword1 = StringUtils.split(keyword[i], ",");
                 Short keyword1_1 = Short.parseShort(keyword1[0].replace("년", ""));
                 Short keyword2_1 = Short.parseShort(keyword1[1].replace("년", ""));
