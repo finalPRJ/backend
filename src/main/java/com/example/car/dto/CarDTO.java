@@ -18,7 +18,7 @@ public class CarDTO {
     private Short year;        // 연식
     private String km;          // 주행거리
     private Integer kmr;        // km값 비교를 위함  Ex. 1120km ~ 2000km
-    private String oil;     // 연료 타입
+    private String oil;         // 연료 타입
     private String region;      // 중고차 보관 센터 지역
     private String link;        // 해당 중고차 사이트 이동 링크
     private String img;         // 해당 중고차 이미지 링크
