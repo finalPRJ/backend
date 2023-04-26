@@ -8,12 +8,18 @@ import com.example.car.service.CarService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/car")
 @Log4j2
 @RequiredArgsConstructor
@@ -23,15 +29,10 @@ public class CarController {
     private final CarService service;
 
     @GetMapping("/list")
-    public void list(PageRequestDTO pageRequestDTO, Model model) {
+    public ResponseEntity<PageResultDTO<CarDTO, Car>> list(PageRequestDTO pageRequestDTO, Model model) {
         log.info("list"+pageRequestDTO);
         model.addAttribute("result", service.getList(pageRequestDTO));
-        
-        // 출력 결과 테스트용
-        PageResultDTO<CarDTO, Car> resultDTO = service.getList(pageRequestDTO);
-        System.out.println("=========================================");
-        for(CarDTO carDTO : resultDTO.getDtoList()) {
-            System.out.println(carDTO);
-        }
+
+        return new ResponseEntity<>(service.getList(pageRequestDTO), HttpStatus.OK);
     }
 }
