@@ -16,8 +16,11 @@ public class PageRequestDTO {
     private int size;
 
     // 검색 조건, 키워드 추가
-    private String[] type;
-    private String[] keyword;
+    private String[] type;      // 플랫폼, 차종, 국/수입, 브랜드 등 검색
+    private String search;      // 일반 검색
+    private String[] mtype;     // 가격 범위
+    private String[] ktype;     // km 범위
+    private String[] ytype;     // 연식 범위
 
     // 리스 게시판 검색에서 쓰일 것
     private String btype;       // 제목, 내용, 닉네임으로 검색
