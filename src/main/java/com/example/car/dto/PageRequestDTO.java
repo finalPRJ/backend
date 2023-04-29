@@ -23,8 +23,7 @@ public class PageRequestDTO {
     private String[] ytype;     // 연식 범위
 
     // 리스 게시판 검색에서 쓰일 것
-    private String btype;       // 제목, 내용, 닉네임으로 검색
-    private String bkeyword;    // 선택한 type에 대한 내용
+    private String btype;
 
     public PageRequestDTO() {
         this.page =1;

@@ -100,10 +100,10 @@ public class BoardRepositoryTest {
     @Test
     public void testSearchPage() {
         Pageable pageable = PageRequest.of
-                (0,30, Sort.by("bno").descending()
+                (0,40, Sort.by("bno").descending()
                         .and(Sort.by("title").ascending()));
 
-        Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
+        Page<Object[]> result = boardRepository.searchPage("title:20", pageable);
     }
 
 }

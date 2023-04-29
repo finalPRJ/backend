@@ -71,8 +71,10 @@ public class BoardController {
         log.info("dto: "+ dto);
 
         redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
-        redirectAttributes.addAttribute("type", pageRequestDTO.getType());
-        redirectAttributes.addAttribute("keyword", pageRequestDTO.getKeyword());
+        redirectAttributes.addAttribute("type", pageRequestDTO.getBtype());
+
+/*        redirectAttributes.addAttribute("type", pageRequestDTO.getType());
+        redirectAttributes.addAttribute("keyword", pageRequestDTO.getKeyword());*/
 
         redirectAttributes.addAttribute("bno", dto.getBno());
         return "redirect:/board/read";
