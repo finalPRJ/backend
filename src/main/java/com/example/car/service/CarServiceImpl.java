@@ -86,6 +86,12 @@ public class CarServiceImpl implements CarService {
                 if (type[i].contains("승합차")) {     // 차종 (테스트: 성공)
                     conditionBuilder.and(qCar.type.contains("승합차"));
                 }
+                if (type[i].contains("스포츠카")) {     // 차종 (테스트: 성공)
+                    conditionBuilder.and(qCar.type.contains("스포츠카"));
+                }
+                if (type[i].contains("SUV")) {     // 차종 (테스트: 성공)
+                    conditionBuilder.and(qCar.type.contains("SUV"));
+                }
                 
                 if (type[i].contains("기아")) {     // 브랜드 (테스트: 성공)
                     conditionBuilder.and(qCar.brand.contains("기아"));
@@ -268,28 +274,22 @@ public class CarServiceImpl implements CarService {
             conditionBuilder.and(qCar.model.contains(search));
         }
         if(mtype != null) {
-            for(int i =0; i< mtype.length; i++) {
-                int keyword1_1 = Integer.parseInt(mtype[0].replace("만원", "0000"));
-                int keyword2_1 = Integer.parseInt(mtype[1].replace("만원", "0000"));
+            int keyword1_1 = Integer.parseInt(mtype[0].replace("만원", "0000"));
+            int keyword2_1 = Integer.parseInt(mtype[1].replace("만원", "0000"));
 
-                conditionBuilder.and(qCar.pricer.between(keyword1_1, keyword2_1));
-            }
+            conditionBuilder.and(qCar.pricer.between(keyword1_1, keyword2_1));
         }
         if(ktype != null) {
-            for(int i =0; i< ktype.length; i++) {
                 int keyword1_1 = Integer.parseInt(ktype[0].replace("km", ""));
                 int keyword2_1 = Integer.parseInt(ktype[1].replace("km", ""));
 
                 conditionBuilder.and(qCar.kmr.between(keyword1_1, keyword2_1));
-            }
         }
         if(ytype != null) {
-            for(int i =0; i< ytype.length; i++) {
-                int keyword1_1 = Integer.parseInt(ytype[0].replace("년", ""));
-                int keyword2_1 = Integer.parseInt(ytype[1].replace("년", ""));
+            int keyword1_1 = Integer.parseInt(ytype[0].replace("년", ""));
+            int keyword2_1 = Integer.parseInt(ytype[1].replace("년", ""));
 
-                conditionBuilder.and(qCar.year.between(keyword1_1, keyword2_1));
-            }
+            conditionBuilder.and(qCar.year.between(keyword1_1, keyword2_1));
         }
 
         // 검색 조건 통합
