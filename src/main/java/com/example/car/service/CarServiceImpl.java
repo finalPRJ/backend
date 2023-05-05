@@ -273,25 +273,62 @@ public class CarServiceImpl implements CarService {
         if (search != null) {     // 모델 이름 (테스트: 성공)
             conditionBuilder.and(qCar.model.contains(search));
         }
-        if(mtype != null) {
+        if ("최소".equals(mtype[0])) {
+            int keyword1_1=0;
+            int keyword2_1 = Integer.parseInt(mtype[1].replace("만원", "0000"));
+
+            conditionBuilder.and(qCar.pricer.between(keyword1_1, keyword2_1));
+        }
+        else if ("최대".equals(mtype[1])) {
+            int keyword1_1 = Integer.parseInt(mtype[0].replace("만원", "0000"));
+            int keyword2_1 = 100000000;
+
+            conditionBuilder.and(qCar.pricer.between(keyword1_1, keyword2_1));
+        }
+        else {
             int keyword1_1 = Integer.parseInt(mtype[0].replace("만원", "0000"));
             int keyword2_1 = Integer.parseInt(mtype[1].replace("만원", "0000"));
 
             conditionBuilder.and(qCar.pricer.between(keyword1_1, keyword2_1));
         }
-        if(ktype != null) {
-                int keyword1_1 = Integer.parseInt(ktype[0].replace("km", ""));
-                int keyword2_1 = Integer.parseInt(ktype[1].replace("km", ""));
 
-                conditionBuilder.and(qCar.kmr.between(keyword1_1, keyword2_1));
+        if ("최소".equals(ktype[0])) {
+            int keyword1_1=0;
+            int keyword2_1 = Integer.parseInt(ktype[1].replace("km", ""));
+
+            conditionBuilder.and(qCar.kmr.between(keyword1_1, keyword2_1));
         }
-        if(ytype != null) {
+        else if ("최대".equals(ktype[1])) {
+            int keyword1_1 = Integer.parseInt(ktype[0].replace("km", ""));
+            int keyword2_1 = 2000000;
+
+            conditionBuilder.and(qCar.kmr.between(keyword1_1, keyword2_1));
+        }
+        else {
+            int keyword1_1 = Integer.parseInt(ktype[0].replace("km", ""));
+            int keyword2_1 = Integer.parseInt(ktype[1].replace("km", ""));
+
+            conditionBuilder.and(qCar.kmr.between(keyword1_1, keyword2_1));
+        }
+
+        if ("최소".equals(ytype[0])) {
+            int keyword1_1 = 1989;
+            int keyword2_1 = Integer.parseInt(ytype[1].replace("년", ""));
+
+            conditionBuilder.and(qCar.year.between(keyword1_1, keyword2_1));
+        }
+        else if ("최대".equals(ytype[1])) {
+            int keyword1_1 = Integer.parseInt(ytype[0].replace("년", ""));
+            int keyword2_1 = 2024;
+
+            conditionBuilder.and(qCar.year.between(keyword1_1, keyword2_1));
+        }
+        else {
             int keyword1_1 = Integer.parseInt(ytype[0].replace("년", ""));
             int keyword2_1 = Integer.parseInt(ytype[1].replace("년", ""));
 
             conditionBuilder.and(qCar.year.between(keyword1_1, keyword2_1));
         }
-
         // 검색 조건 통합
         booleanBuilder.and(conditionBuilder);
 
