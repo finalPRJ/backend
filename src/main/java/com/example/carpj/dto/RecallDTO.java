@@ -11,6 +11,4 @@ public class RecallDTO {
     private String brand; //리콜된 브랜드
     private String model; //리콜된 차명
     private String reasons; //리콜 사유
-    private String ranking; //리콜 순위
-    private Integer amount; //리콜 개시된 대수
 }

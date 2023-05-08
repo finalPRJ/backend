@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor //필드 값을 다 넣은 생성자
 @NoArgsConstructor //기본 생성자
-@Table(name = "recall")
+@Table(name = "recall_data")
 public class Recall {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +22,4 @@ public class Recall {
 
     @Column(length = 1000)
     private String reasons; //리콜 사유
-
-    @Column(length = 50, nullable = false)
-    private String ranking; //리콜 순위
-
-    private Integer amount; //리콜 개시된 대수
 }

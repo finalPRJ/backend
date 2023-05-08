@@ -25,10 +25,10 @@ public class RecallServiceImpl implements RecallService{
 
             for(Recall recall : entity) {
                 //ranking값이 -(음수)일 경우
-                if(recall.getRanking().contains("-")) {
+//                if(recall.getRanking().contains("-")) {
                     RecallDTO dto = entityToDTO(recall);
                     rList.add(dto);
-                }
+//                }
             }
             return rList.isEmpty() ? null : rList;
         } catch(Exception e) {
@@ -37,45 +37,45 @@ public class RecallServiceImpl implements RecallService{
         }
     }
 
-    @Override
-    public List<RecallDTO> worst4() { //recall 많이 개시된 TOP4
-        try{
-            log.info("------------------- Recall worst4 -------------------");
-            List<Recall> entity = recallRepository.findAll();
-            List<RecallDTO> rList = new ArrayList<>();
-
-            for(Recall recall : entity) {
-                //ranking값이 숫자(양수)일 경우
-                if(recall.getRanking().chars().allMatch(Character::isDigit)) {
-                    RecallDTO dto = entityToDTO(recall);
-                    rList.add(dto);
-                }
-            }
-            return rList.isEmpty() ? null : rList;
-        } catch(Exception e) {
-            log.info("오류");
-            return null;
-        }
-    }
-
-    @Override
-    public List<RecallDTO> worstInfo(String rate) { //recall된 브랜드 별 상세 정보
-        try{
-            log.info("------------------- Recall worstInfo -------------------");
-            List<Recall> entity = recallRepository.findAll();
-            List<RecallDTO> rList = new ArrayList<>();
-            System.out.println(rate);
-            for(Recall recall : entity) {
-                //ranking값이 해당 브랜드 정보(순위)이고 알파벳이 포함되어 있는지
-                if(recall.getRanking().contains(rate) && !recall.getRanking().chars().allMatch(Character::isDigit) && !recall.getRanking().contains("-")) {
-                    RecallDTO dto = entityToDTO(recall);
-                    rList.add(dto);
-                }
-            }
-            return rList.isEmpty() ? null : rList;
-        } catch(Exception e) {
-            log.info("오류");
-            return null;
-        }
-    }
+//    @Override
+//    public List<RecallDTO> worst4() { //recall 많이 개시된 TOP4
+//        try{
+//            log.info("------------------- Recall worst4 -------------------");
+//            List<Recall> entity = recallRepository.findAll();
+//            List<RecallDTO> rList = new ArrayList<>();
+//
+//            for(Recall recall : entity) {
+//                //ranking값이 숫자(양수)일 경우
+//                if(recall.getRanking().chars().allMatch(Character::isDigit)) {
+//                    RecallDTO dto = entityToDTO(recall);
+//                    rList.add(dto);
+//                }
+//            }
+//            return rList.isEmpty() ? null : rList;
+//        } catch(Exception e) {
+//            log.info("오류");
+//            return null;
+//        }
+//    }
+//
+//    @Override
+//    public List<RecallDTO> worstInfo(String rate) { //recall된 브랜드 별 상세 정보
+//        try{
+//            log.info("------------------- Recall worstInfo -------------------");
+//            List<Recall> entity = recallRepository.findAll();
+//            List<RecallDTO> rList = new ArrayList<>();
+//            System.out.println(rate);
+//            for(Recall recall : entity) {
+//                //ranking값이 해당 브랜드 정보(순위)이고 알파벳이 포함되어 있는지
+//                if(recall.getRanking().contains(rate) && !recall.getRanking().chars().allMatch(Character::isDigit) && !recall.getRanking().contains("-")) {
+//                    RecallDTO dto = entityToDTO(recall);
+//                    rList.add(dto);
+//                }
+//            }
+//            return rList.isEmpty() ? null : rList;
+//        } catch(Exception e) {
+//            log.info("오류");
+//            return null;
+//        }
+//    }
 }

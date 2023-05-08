@@ -19,13 +19,9 @@ public class QRecall extends EntityPathBase<Recall> {
 
     public static final QRecall recall = new QRecall("recall");
 
-    public final NumberPath<Integer> amount = createNumber("amount", Integer.class);
-
     public final StringPath brand = createString("brand");
 
     public final StringPath model = createString("model");
-
-    public final StringPath ranking = createString("ranking");
 
     public final StringPath reasons = createString("reasons");
 

@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface RecallService {
     //recall 많이 개시된 TOP4
-    List<RecallDTO> worst4();
+//    List<RecallDTO> worst4();
 
     //recall 적게 개시된 TOP4
     List<RecallDTO> best4();
 
     //recall된 브랜드 별 상세 정보
-    List<RecallDTO> worstInfo(String rate);
+//    List<RecallDTO> worstInfo(String rate);
 
     //서비스 계층에서는 파라미터를 DTO 타입으로 받기 때문에 이를 JPA로 처리하기 위해서 엔티티 타입의 객체로 변환
     default Recall dtoToEntity(RecallDTO dto) {
@@ -22,8 +22,6 @@ public interface RecallService {
                 .brand(dto.getBrand())
                 .model(dto.getModel())
                 .reasons(dto.getReasons())
-                .ranking(dto.getRanking())
-                .amount(dto.getAmount())
                 .build();
         return recall;
     }
@@ -35,8 +33,6 @@ public interface RecallService {
                 .brand(recall.getBrand())
                 .model(recall.getModel())
                 .reasons(recall.getReasons())
-                .ranking(recall.getRanking())
-                .amount(recall.getAmount())
                 .build();
         return dto;
     }
