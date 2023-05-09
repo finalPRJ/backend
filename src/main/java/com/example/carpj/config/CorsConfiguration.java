@@ -1,4 +1,4 @@
-package com.example.mungcare.config;
+package com.example.carpj.config;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
