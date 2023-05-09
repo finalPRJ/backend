@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RestController
 @RequestMapping("/board")
 @Log4j2
+
 @RequiredArgsConstructor
 public class BoardController {
 
@@ -49,11 +50,11 @@ public class BoardController {
     }
 
     @GetMapping({"/read", "/modify"})
-    public void read(@ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO, Integer bno, Model model) {
+    public ResponseEntity<BoardDTO> read(@ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO, Integer bno, Model model) {
         log.info("bno: "+ bno);
-        BoardDTO boardDTO = boardService.get(bno);
-        log.info(boardDTO);
-        model.addAttribute("dto", boardDTO);
+        model.addAttribute("dto", boardService.get(bno));
+
+        return new ResponseEntity<>(boardService.get(bno), HttpStatus.OK);
     }
 
     @PostMapping("/remove")
@@ -70,11 +71,11 @@ public class BoardController {
         log.info("post modify........................");
         log.info("dto: "+ dto);
 
+        boardService.modify(dto);
+
         redirectAttributes.addAttribute("page", pageRequestDTO.getPage());
         redirectAttributes.addAttribute("type", pageRequestDTO.getBtype());
 
-/*        redirectAttributes.addAttribute("type", pageRequestDTO.getType());
-        redirectAttributes.addAttribute("keyword", pageRequestDTO.getKeyword());*/
 
         redirectAttributes.addAttribute("bno", dto.getBno());
         return "redirect:/board/read";

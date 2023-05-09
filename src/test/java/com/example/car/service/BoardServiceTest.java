@@ -52,7 +52,7 @@ public class BoardServiceTest {
     @Test
     public void testModify() {
         BoardDTO boardDTO = BoardDTO.builder()
-                .bno(21)
+                .bno(4)
                 .title("수정")
                 .content("수정한 데이터")
                 .build();
