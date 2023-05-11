@@ -63,8 +63,27 @@ public class BoardServiceImpl implements BoardService {
     public void modify(BoardDTO boardDTO) {
         Board board = repository.getReferenceById(boardDTO.getBno());
 
-        board.changeTitle(boardDTO.getTitle());
-        board.changeContent(boardDTO.getContent());
+        if (boardDTO.getTitle() != null) {
+            board.changeTitle(boardDTO.getTitle());
+        }
+        if (boardDTO.getContent() != null) {
+            board.changeContent(boardDTO.getContent());
+        }
+        if (boardDTO.getOptions1() != null) {
+            board.changeOptions1(boardDTO.getOptions1());
+        }
+        if (boardDTO.getOptions2() != null) {
+            board.changeOptions2(boardDTO.getOptions2());
+        }
+        if (boardDTO.getOptions3() != null) {
+            board.changeOptions3(boardDTO.getOptions3());
+        }
+        if (boardDTO.getOptions4() != null) {
+            board.changeOptions4(boardDTO.getOptions4());
+        }
+        if (boardDTO.getOptions5() != null) {
+            board.changeOptions5(boardDTO.getOptions5());
+        }
 
         repository.save(board);
     }

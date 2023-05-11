@@ -25,6 +25,11 @@ public interface BoardService {
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .writer(member)
+                .options1(dto.getOptions1())
+                .options2(dto.getOptions2())
+                .options3(dto.getOptions3())
+                .options4(dto.getOptions4())
+                .options5(dto.getOptions5())
                 .build();
         return board;
     }
@@ -38,6 +43,11 @@ public interface BoardService {
                 .writerId(member.getId())
                 .writerNickname(member.getNickname())
                 .replyCount(replyCount.intValue())
+                .options1(board.getOptions1())
+                .options2(board.getOptions2())
+                .options3(board.getOptions3())
+                .options4(board.getOptions4())
+                .options5(board.getOptions5())
                 .build();
         return boardDTO;
     }
