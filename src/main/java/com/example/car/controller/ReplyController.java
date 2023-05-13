@@ -1,5 +1,6 @@
 package com.example.car.controller;
 
+import com.example.car.dto.BoardDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,8 @@ import java.util.List;
 public class ReplyController {
     private final ReplyService replyService;
 
+    private BoardDTO boardDTO;
+
     @GetMapping(value = "/board/{bno}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ReplyDTO>> getListByBoard(@PathVariable("bno") Integer bno) {
         log.info("bno: "+ bno);
@@ -28,7 +31,7 @@ public class ReplyController {
         return new ResponseEntity<>( replyService.getList(bno), HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/register")
     public ResponseEntity<Integer> register(@RequestBody ReplyDTO replyDTO) {
         log.info(replyDTO);
 
@@ -37,16 +40,17 @@ public class ReplyController {
         return new ResponseEntity<>(rno, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{rno}")
+    @PostMapping("/delete/{bno}")
     public ResponseEntity<String> remove(@PathVariable("rno") Integer rno) {
         log.info("RNO: "+ rno);
         replyService.remove(rno);
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
-    @PutMapping("/{rno}")
-    public ResponseEntity<String> modify(@RequestBody ReplyDTO replyDTO) {
+    @PostMapping("/modify/{bno}")
+    public ResponseEntity<String> modify(@PathVariable Integer bno, @RequestBody ReplyDTO replyDTO) {
         log.info(replyDTO);
+        replyDTO.setBno(bno);
         replyService.modify(replyDTO);
         return new ResponseEntity<>("success", HttpStatus.OK);
     }

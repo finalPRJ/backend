@@ -18,7 +18,7 @@ public class Reply extends BaseEntity {
     private Integer rno; // 댓글 번호
     @Column(length = 300, nullable = false)
     private String content; // 댓글 내용
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
     private Member replyer; // 댓글 작성자
     @ManyToOne(fetch = FetchType.LAZY)
