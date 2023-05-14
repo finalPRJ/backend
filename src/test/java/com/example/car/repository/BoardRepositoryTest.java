@@ -39,6 +39,11 @@ public class BoardRepositoryTest {
                     .title("Title"+i)
                     .content("Content"+i)
                     .writer(member)
+                    .options1("")
+                    .options2("")
+                    .options3("")
+                    .options4("")
+                    .options5("")
                     .build();
             boardRepository.save(board);
         });

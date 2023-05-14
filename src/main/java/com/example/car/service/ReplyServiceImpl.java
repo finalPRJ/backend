@@ -57,7 +57,9 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public void remove(Integer rno) {
-        replyRepository.deleteById(rno);
+        Reply reply = replyRepository.findById(rno).orElseThrow(() -> new IllegalArgumentException("해당 댓글이 없습니다. rno=" + rno));
+
+        replyRepository.delete(reply);
     }
 
 }

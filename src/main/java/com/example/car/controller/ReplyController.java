@@ -40,7 +40,7 @@ public class ReplyController {
         return new ResponseEntity<>(rno, HttpStatus.OK);
     }
 
-    @PostMapping("/delete/{bno}")
+    @PostMapping("/delete/{rno}")
     public ResponseEntity<String> remove(@PathVariable("rno") Integer rno) {
         log.info("RNO: "+ rno);
         replyService.remove(rno);
