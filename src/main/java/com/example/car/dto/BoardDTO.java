@@ -21,4 +21,5 @@ public class BoardDTO {
     private String options5; // 멀티 옵션
     private LocalDateTime createtime; // 생성날짜
     private int replyCount; // 해당 게시글의 댓글 수
+
 }
