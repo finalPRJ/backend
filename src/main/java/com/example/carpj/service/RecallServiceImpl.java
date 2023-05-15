@@ -38,7 +38,7 @@ public class RecallServiceImpl implements RecallService{
     }
 
     @Override
-    public Map<String, Integer> wordCloud(String carType) { //워드 클라우드
+    public List<Map<String, Object>> wordCloud(String carType) { //워드 클라우드
         List<Recall> entity = recallRepository.findAll();
         List<String> nList = new ArrayList<String>();
 
@@ -94,7 +94,17 @@ public class RecallServiceImpl implements RecallService{
             wordMap.put(word, frequency);
         }
 
-        return wordMap;
+        List<Map<String, Object>> wordCloudList = new ArrayList<>();
+
+        for (Map.Entry<String, Integer> entry : wordMap.entrySet()) {
+            Map<String, Object> wordCloudEntry = new HashMap<>();
+            wordCloudEntry.put("text", entry.getKey());
+            wordCloudEntry.put("value", entry.getValue());
+
+            wordCloudList.add(wordCloudEntry);
+        }
+
+        return wordCloudList;
     }
 
 }

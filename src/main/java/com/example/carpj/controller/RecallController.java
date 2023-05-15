@@ -24,9 +24,9 @@ public class RecallController {
     }
 
     @GetMapping("/wordCloud")
-    public Map<String, Integer> wordCloud(String carType) {
+    public List<Map<String, Object>> wordCloud(String carType) {
         log.info("wordCloud....");
-        Map<String, Integer> wList = recallService.wordCloud(carType);
+        List<Map<String, Object>> wList = recallService.wordCloud(carType);
         return wList;
     }
 }

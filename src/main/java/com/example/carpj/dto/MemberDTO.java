@@ -1,5 +1,6 @@
 package com.example.carpj.dto;
 
+import com.example.carpj.entity.AuthProvider;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,13 +12,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class MemberDTO {
     private String id; //아이디
-    private String pw; //패스워드
     private String name; //이름
-    private String nickname; //닉네임
-    private String phone; //전화번호
-    private String address; //주소
-    private String detail_Address; //상세 주소
-    private String location_Num; //우편번호
-    private Integer age; //나이
-    private String platform; //토큰
+    private String email; //이메일
+    private String imageUrl; //프로필
+    private AuthProvider provider; //소셜 로그인
+    private String providerId; //외부 인증 제공자의 사용자 식별자 저장
 }
