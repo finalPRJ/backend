@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Log4j2
@@ -16,23 +17,16 @@ public class RecallController {
     private final RecallService recallService;
 
     @GetMapping("/data")
-    public List<RecallDTO> best() { //recall 적게 된 TOP4
+    public List<RecallDTO> basic() { //recall 데이터
         log.info("data.....");
-        List<RecallDTO> rList = recallService.best4();
+        List<RecallDTO> rList = recallService.basic();
         return rList;
     }
 
-//    @PostMapping("/worst")
-//    public List<RecallDTO> worst() { //recall 많이 된 TOP4
-//        log.info("worst.....");
-//        List<RecallDTO> rList = recallService.worst4();
-//        return rList;
-//    }
-//
-//    @PostMapping("/worstInfo")
-//    public List<RecallDTO> worstInfo(@RequestParam("rate") String rate) { //recall 많이 된 브랜드 별 상세 정보
-//        log.info("worstInfo.....");
-//        List<RecallDTO> rList = recallService.worstInfo(rate);
-//        return rList;
-//    }
+    @GetMapping("/wordCloud")
+    public Map<String, Integer> wordCloud(String carType) {
+        log.info("wordCloud....");
+        Map<String, Integer> wList = recallService.wordCloud(carType);
+        return wList;
+    }
 }

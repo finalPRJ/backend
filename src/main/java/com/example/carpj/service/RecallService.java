@@ -4,16 +4,13 @@ import com.example.carpj.dto.RecallDTO;
 import com.example.carpj.entity.Recall;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RecallService {
-    //recall 많이 개시된 TOP4
-//    List<RecallDTO> worst4();
 
-    //recall 적게 개시된 TOP4
-    List<RecallDTO> best4();
+    List<RecallDTO> basic(); //recall 기본 데이터
 
-    //recall된 브랜드 별 상세 정보
-//    List<RecallDTO> worstInfo(String rate);
+    Map<String, Integer> wordCloud(String carType); //워드 클라우드
 
     //서비스 계층에서는 파라미터를 DTO 타입으로 받기 때문에 이를 JPA로 처리하기 위해서 엔티티 타입의 객체로 변환
     default Recall dtoToEntity(RecallDTO dto) {
