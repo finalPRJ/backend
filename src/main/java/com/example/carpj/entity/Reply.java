@@ -12,7 +12,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper=false)
 @Table(name = "reply")
 public class Reply extends BaseEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rno; // 댓글 번호

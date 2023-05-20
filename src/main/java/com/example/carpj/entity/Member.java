@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Builder
@@ -36,4 +37,8 @@ public class Member {
     private AuthProvider provider;
 
     private String providerId; //외부 인증 제공자의 사용자 식별자 저장
+
+    private String sex; //성별
+
+    private Integer year; //생일(나이대)
 }

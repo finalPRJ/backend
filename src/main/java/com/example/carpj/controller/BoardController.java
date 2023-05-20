@@ -25,7 +25,7 @@ public class BoardController {
     public ResponseEntity<PageResultDTO<BoardDTO, Object[]>> list(PageRequestDTO pageRequestDTO, Model model) {
         log.info("list................"+ pageRequestDTO);
         model.addAttribute("result", boardService.getList(pageRequestDTO));
-        
+
         // 출력 테스트용
         return new ResponseEntity<>(boardService.getList(pageRequestDTO), HttpStatus.OK);
     }
@@ -36,13 +36,9 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(BoardDTO dto, RedirectAttributes redirectAttributes) {
-        log.info("dto..."+ dto);
-        // 새로 추가된 엔티티의 번호
+    public ResponseEntity<Integer> register(@RequestBody BoardDTO dto) {
         Integer bno = boardService.register(dto);
-        log.info("BNO: "+ bno);
-        redirectAttributes.addFlashAttribute("msg", bno);
-        return "redirect:/board/list";
+        return ResponseEntity.ok().body(bno);
     }
 
     @GetMapping({"/read", "/modify"})
@@ -54,7 +50,7 @@ public class BoardController {
     }
 
     @PostMapping("/remove")
-    public String remove(Integer bno, RedirectAttributes redirectAttributes) {
+    public String remove(@RequestParam Integer bno, RedirectAttributes redirectAttributes) {
         log.info("bno: "+ bno);
         boardService.removeWithReplies(bno);
         redirectAttributes.addFlashAttribute("msg", bno);
@@ -62,7 +58,7 @@ public class BoardController {
     }
 
     @PostMapping("/modify")
-    public String modify(BoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
+    public String modify(@RequestBody BoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
                          RedirectAttributes redirectAttributes) {
         log.info("post modify........................");
         log.info("dto: "+ dto);
@@ -76,5 +72,4 @@ public class BoardController {
         redirectAttributes.addAttribute("bno", dto.getBno());
         return "redirect:/board/read";
     }
-
 }
