@@ -18,12 +18,12 @@ public class MemberServiceImpl implements MemberService{
             log.info("memberModify");
             // sex 값이 존재하지 않는 경우에만 수정
             if(member.getSex() != null && !member.getSex().isEmpty()) {
-                member.setSex(sex);
+                member.changeSex(sex);
             }
 
             // year 값이 존재하지 않는 경우에만 수정
             if (member.getYear() != null) {
-                member.setYear(year);
+                member.changeYear(year);
             }
             memberRepository.save(member); // 수정된 회원 정보 저장
 

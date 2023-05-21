@@ -41,4 +41,12 @@ public class Member {
     private String sex; //성별
 
     private Integer year; //생일(나이대)
+
+    public void changeSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void changeYear(Integer year) {
+        this.year = year;
+    }
 }
