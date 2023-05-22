@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -34,7 +35,7 @@ public class MemberController {
 
     @GetMapping("/modify")
     @PreAuthorize("hasRole('USER')")
-    public boolean MemberModify(@CurrentUser UserPrincipal userPrincipal, String sex, Integer year) {
+    public boolean MemberModify(@CurrentUser UserPrincipal userPrincipal, @RequestParam("sex")String sex, @RequestParam("year")Integer year) {
         System.out.println("=================================user/modify=================================");
         // 현재 인증된 사용자 정보 가져온다.
         Member member = memberRepository.findById(userPrincipal.getId())

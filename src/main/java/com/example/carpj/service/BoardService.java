@@ -18,13 +18,13 @@ public interface BoardService {
     void modify(BoardDTO boardDTO);
 
     default Board dtoToEntity(BoardDTO dto){
-        Member member = Member.builder().email(dto.getWriterId()).build();
+        Member member = Member.builder().id(dto.getId()).build();
 
         Board board = Board.builder()
                 .bno(dto.getBno())
                 .title(dto.getTitle())
                 .content(dto.getContent())
-                .writer(member)
+                .id(member)
                 .options1(dto.getOptions1())
                 .options2(dto.getOptions2())
                 .options3(dto.getOptions3())
@@ -40,7 +40,7 @@ public interface BoardService {
                 .title(board.getTitle())
                 .content(board.getContent())
                 .createtime(board.getCreatetime())
-                .writerId(member.getEmail())
+                .id(member.getId())
                 .writerNickname(member.getName())
                 .replyCount(replyCount.intValue())
                 .options1(board.getOptions1())

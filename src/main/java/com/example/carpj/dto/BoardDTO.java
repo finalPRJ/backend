@@ -12,7 +12,7 @@ public class BoardDTO {
     private Integer bno; // 게시글 번호
     private String title; // 게시글 제목
     private String content; // 게시글 내용
-    private String writerId; // 작성자 id
+    private Long id; // 작성자 id
     private String writerNickname; // 작성자 nickname
     private String options1; // 외장 옵션
     private String options2; // 내장 옵션

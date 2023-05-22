@@ -18,6 +18,18 @@ import java.util.List;
 public class CarViewServiceImpl implements CarViewService{
     private final CarViewRepository carViewRepository; //자동 주입 final
 
+//    @Override
+//    @Transactional
+//    public boolean register(Long id, Integer cDNo); { //특정 항목 조회 값 DB에 저장
+//        try {
+//            log.info("특정 항목 조회 값 DB에 저장-------------------");
+//
+//        } catch(Exception e) {
+//            log.info(e.getMessage());
+//            return false;
+//        }
+//    }
+
     @Override
     @Transactional
     public List<CarViewDTO> rank() { //전체 조회수 순위

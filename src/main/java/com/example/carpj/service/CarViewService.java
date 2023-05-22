@@ -8,6 +8,7 @@ import com.example.carpj.entity.Member;
 import java.util.List;
 
 public interface CarViewService {
+//    boolean register(Long id, Integer cDNo); //특정 항목 조회 값 DB에 저장
     List<CarViewDTO> rank(); //전체 조회수 순위
     
     //연령별 조회수 순위
@@ -15,11 +16,11 @@ public interface CarViewService {
     //차종별 조회수 순위
 
     default CarView dtoToEntity(CarViewDTO dto) {
-        CarDic carDic = CarDic.builder().cDNo(dto.getModelNum()).build();
+        CarDic carDic = CarDic.builder().cDNo(dto.getCDNo()).build();
         Member member = Member.builder().id(dto.getId()).build();
         CarView carView = CarView.builder()
                 .cVNo(dto.getCVNo())
-                .modelNum(carDic)
+                .cDNo(carDic)
                 .id(member)
                 .count(dto.getCount())
                 .build();
@@ -27,11 +28,11 @@ public interface CarViewService {
     }
 
     default CarViewDTO entityToDTO(CarView carView) {
-        CarDic carDic = carView.getModelNum();
+        CarDic carDic = carView.getCDNo();
         Member member = carView.getId();
         CarViewDTO dto = CarViewDTO.builder()
                 .cVNo(carView.getCVNo())
-                .modelNum(carDic.getCDNo())
+                .cDNo(carDic.getCDNo())
                 .id(member.getId())
                 .count(carView.getCount())
                 .build();

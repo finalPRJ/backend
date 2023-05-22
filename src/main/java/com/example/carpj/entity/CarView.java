@@ -22,7 +22,7 @@ public class CarView {
     @OnDelete(action = OnDeleteAction.CASCADE) //회원 삭제되면 해당 포인트들도 삭제
     @JoinColumn(name = "cDNo")
     @JsonIgnore //저장 성공한 객체를 확인시키기 위한 JSON response에서 figure를 제외하고 보낸다.
-    private CarDic modelNum; //carDic에서 어떤 모델인지 받아오기
+    private CarDic cDNo; //carDic에서 어떤 모델인지 받아오기
 
     @ManyToOne(fetch = FetchType.LAZY) //명시적으로 Lazy 로딩 지정
     @OnDelete(action = OnDeleteAction.CASCADE) //회원 삭제되면 해당 포인트들도 삭제
