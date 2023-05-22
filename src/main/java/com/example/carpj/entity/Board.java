@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Data
 @EqualsAndHashCode(callSuper=false)
+@ToString(exclude={"id"}) //연관관계가 있는 엔티티 클래스의 경우 exclude 속성 사용하기. 해당 속성값은 제외
 @Table(name = "board")
 public class Board extends BaseEntity {
     

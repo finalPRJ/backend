@@ -8,11 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Getter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
+@Data
+@AllArgsConstructor //필드 값을 다 넣은 생성자
+@NoArgsConstructor //기본 생성자
 public class CarDic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
