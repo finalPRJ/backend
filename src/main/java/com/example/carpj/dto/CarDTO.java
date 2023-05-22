@@ -22,4 +22,6 @@ public class CarDTO {
     private String region;      // 중고차 보관 센터 지역
     private String link;        // 해당 중고차 사이트 이동 링크
     private String img;         // 해당 중고차 이미지 링크
+
+    private Integer cDNo; //자동차 딕셔너리 번호
 }

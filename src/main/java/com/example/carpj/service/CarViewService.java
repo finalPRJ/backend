@@ -1,0 +1,40 @@
+package com.example.carpj.service;
+
+import com.example.carpj.dto.CarViewDTO;
+import com.example.carpj.entity.CarDic;
+import com.example.carpj.entity.CarView;
+import com.example.carpj.entity.Member;
+
+import java.util.List;
+
+public interface CarViewService {
+    List<CarViewDTO> rank(); //전체 조회수 순위
+    
+    //연령별 조회수 순위
+    //국산/수입별 조회수 순위
+    //차종별 조회수 순위
+
+    default CarView dtoToEntity(CarViewDTO dto) {
+        CarDic carDic = CarDic.builder().cDNo(dto.getModelNum()).build();
+        Member member = Member.builder().id(dto.getId()).build();
+        CarView carView = CarView.builder()
+                .cVNo(dto.getCVNo())
+                .modelNum(carDic)
+                .id(member)
+                .count(dto.getCount())
+                .build();
+        return carView;
+    }
+
+    default CarViewDTO entityToDTO(CarView carView) {
+        CarDic carDic = carView.getModelNum();
+        Member member = carView.getId();
+        CarViewDTO dto = CarViewDTO.builder()
+                .cVNo(carView.getCVNo())
+                .modelNum(carDic.getCDNo())
+                .id(member.getId())
+                .count(carView.getCount())
+                .build();
+        return dto;
+    }
+}

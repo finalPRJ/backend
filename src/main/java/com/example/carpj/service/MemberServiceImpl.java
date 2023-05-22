@@ -16,15 +16,9 @@ public class MemberServiceImpl implements MemberService{
     public boolean memberModify(Member member, String sex, Integer year) { //회원정보 수정하기
         try {
             log.info("memberModify");
-            // sex 값이 존재하지 않는 경우에만 수정
-            if(member.getSex() != null && !member.getSex().isEmpty()) {
-                member.changeSex(sex);
-            }
 
-            // year 값이 존재하지 않는 경우에만 수정
-            if (member.getYear() != null) {
-                member.changeYear(year);
-            }
+            member.changeSex(sex);
+            member.changeYear(year);
             memberRepository.save(member); // 수정된 회원 정보 저장
 
             return true;
