@@ -19,7 +19,7 @@ public class Reply extends BaseEntity {
     @Column(length = 300, nullable = false)
     private String content; // 댓글 내용
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_email")
     private Member replyer; // 댓글 작성자
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_bno")

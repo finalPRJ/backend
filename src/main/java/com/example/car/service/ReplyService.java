@@ -18,7 +18,7 @@ public interface ReplyService {
 
     default Reply dtoToEntity(ReplyDTO replyDTO) {
         Board board = Board.builder().bno(replyDTO.getBno()).build();
-        Member member = Member.builder().id(replyDTO.getReplyerId()).build();
+        Member member = Member.builder().email(replyDTO.getReplyerId()).build();
 
         Reply reply = Reply.builder()
                 .rno(replyDTO.getRno())
@@ -34,8 +34,8 @@ public interface ReplyService {
         ReplyDTO dto = ReplyDTO.builder()
                 .rno(reply.getRno())
                 .content(reply.getContent())
-                .replyerId(reply.getReplyer().getId())
-                .replyerNickname(reply.getReplyer().getNickname())
+                .replyerId(reply.getReplyer().getEmail())
+                .replyerNickname(reply.getReplyer().getName())
                 .bno(reply.getBoard().getBno())
                 .createtime(reply.getCreatetime())
                 .build();

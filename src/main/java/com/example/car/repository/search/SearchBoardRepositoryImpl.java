@@ -80,7 +80,7 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
                         conditionBuilder.or(board.title.contains(answer[1]));
                         break;
                     case "w":       //(테스트: 성공)
-                        conditionBuilder.or(member.nickname.contains(answer[1]));
+                        conditionBuilder.or(member.name.contains(answer[1]));
                         break;
                     case "c":       //(테스트: 성공)
                         conditionBuilder.or(board.content.contains(answer[1]));

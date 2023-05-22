@@ -6,36 +6,46 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Builder
 @Data
 @AllArgsConstructor //필드 값을 다 넣은 생성자
 @NoArgsConstructor //기본 생성자
-@Table(name = "member")
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
 public class Member {
     @Id
-    private String id; //아이디(이메일)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(length = 300, nullable = false)
-    private String pw; //패스워드
-
+    @Column(nullable = false)
     private String name; //이름
 
-    private String nickname; //닉네임
+    @Email
+    @Column(nullable = false)
+    private String email; //이메일
 
-    private String phone; //전화번호
+    private String imageUrl; //프로필
 
-    private String address; //주소
-
-    private String detail_Address; //상세 주소
-
-    private String location_Num; //우편번호
-
-    private Integer age; //나이
-
-    private String platform; //토큰
-
+    @NotNull
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private AuthProvider provider;
+
+    private String providerId; //외부 인증 제공자의 사용자 식별자 저장
+
+    private String sex; //성별
+
+    private Integer year; //생일(나이대)
+
+    public void changeSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void changeYear(Integer year) {
+        this.year = year;
+    }
 }

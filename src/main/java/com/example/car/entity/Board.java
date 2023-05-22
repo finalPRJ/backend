@@ -20,7 +20,7 @@ public class Board extends BaseEntity {
     private String title; // 게시글 제목
     private String content; // 게시글 내용
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_email")
     private Member writer; // 게시글 작성자
     private String options1; // 외장 옵션
     private String options2; // 내장 옵션
