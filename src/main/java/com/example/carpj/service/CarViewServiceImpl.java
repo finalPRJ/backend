@@ -28,14 +28,9 @@ public class CarViewServiceImpl implements CarViewService{
             CarViewId vcId = new CarViewId(dto.getId(), dto.getCDNo()); //복합키
             Optional<CarView> result = carViewRepository.findById(vcId); //기존에 데이터가 있는지 확인하기 위해서, 해당 데이터가 있는지 확인
             CarView carView = dtoToEntity(dto);
-            System.out.println("찾음??"+dto);
-            System.out.println("찾음??"+carView.getCDNo());
-            System.out.println("찾음??"+carView.getId());
-            System.out.println("찾음??"+carView.getCount());
 
             if(result.isPresent()) { //null이 아니면
-                carView.updateViewCount(carView.getCount()); //view count 1 증가
-                System.out.println("null 아님: "+carView.getCount());
+                carView.updateViewCount(result.get().getCount()); //view count 1 증가
             } else { //null이면
                 carView.setCount(1);
             }
