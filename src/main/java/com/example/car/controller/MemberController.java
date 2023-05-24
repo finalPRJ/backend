@@ -1,4 +1,5 @@
 package com.example.car.controller;
+
 import com.example.car.exception.ResourceNotFoundException;
 import com.example.car.entity.Member;
 import com.example.car.repository.MemberRepository;
@@ -7,9 +8,11 @@ import com.example.car.security.UserPrincipal;
 import com.example.car.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -32,7 +35,7 @@ public class MemberController {
 
     @GetMapping("/modify")
     @PreAuthorize("hasRole('USER')")
-    public boolean MemberModify(@CurrentUser UserPrincipal userPrincipal, String sex, Integer year) {
+    public boolean MemberModify(@CurrentUser UserPrincipal userPrincipal, @RequestParam("sex")String sex, @RequestParam("year")Integer year) {
         System.out.println("=================================user/modify=================================");
         // 현재 인증된 사용자 정보 가져온다.
         Member member = memberRepository.findById(userPrincipal.getId())

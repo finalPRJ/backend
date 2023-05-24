@@ -36,7 +36,7 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
         QMember member = QMember.member;
 
         JPQLQuery<Board> jpqlQuery = from(board);
-        jpqlQuery.leftJoin(member).on(board.writer.eq(member));
+        jpqlQuery.leftJoin(member).on(board.id.eq(member));
         jpqlQuery.leftJoin(reply).on(reply.board.eq(board));
 
         JPQLQuery<Tuple> tuple = jpqlQuery.select(board, member.id, reply.count());
@@ -60,7 +60,7 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
         QMember member = QMember.member;
 
         JPQLQuery<Board> jpqlQuery = from(board);
-        jpqlQuery.leftJoin(member).on(board.writer.eq(member));
+        jpqlQuery.leftJoin(member).on(board.id.eq(member));
         jpqlQuery.leftJoin(reply).on(reply.board.eq(board));
 
         JPQLQuery<Tuple> tuple = jpqlQuery.select(board, member, reply.count());
@@ -117,4 +117,3 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
         );
     }
 }
-

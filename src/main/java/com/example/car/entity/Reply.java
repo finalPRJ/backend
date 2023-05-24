@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Data
 @EqualsAndHashCode(callSuper=false)
+@ToString(exclude={"id"})
 @Table(name = "reply")
 public class Reply extends BaseEntity {
     
@@ -19,8 +20,8 @@ public class Reply extends BaseEntity {
     @Column(length = 300, nullable = false)
     private String content; // 댓글 내용
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_email")
-    private Member replyer; // 댓글 작성자
+    @JoinColumn(name = "id")
+    private Member id; // 댓글 작성자
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_bno")
     private Board board; // 댓글이 작성된 게시글 번호

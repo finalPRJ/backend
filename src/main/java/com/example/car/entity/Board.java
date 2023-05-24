@@ -10,9 +10,10 @@ import javax.persistence.*;
 @Getter
 @Data
 @EqualsAndHashCode(callSuper=false)
+@ToString(exclude={"id"}) //연관관계가 있는 엔티티 클래스의 경우 exclude 속성 사용하기. 해당 속성값은 제외
 @Table(name = "board")
 public class Board extends BaseEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bno; // 게시물 번호
@@ -20,8 +21,8 @@ public class Board extends BaseEntity {
     private String title; // 게시글 제목
     private String content; // 게시글 내용
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_email")
-    private Member writer; // 게시글 작성자
+    @JoinColumn(name = "id")
+    private Member id; // 게시글 작성자 id
     private String options1; // 외장 옵션
     private String options2; // 내장 옵션
     private String options3; // 안전 옵션

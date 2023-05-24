@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ReplyServiceImpl implements ReplyService {
 
+
     private final ReplyRepository replyRepository;
     private final BoardRepository boardRepository;
 
@@ -35,7 +36,7 @@ public class ReplyServiceImpl implements ReplyService {
         List<Reply> result = replyRepository.getRepliesByBoardOrderByRno(Board.builder().bno(bno).build());
 
         return result.stream().map(reply -> {
-            Member member = reply.getReplyer(); // 댓글 작성자 정보 조회
+            Member member = reply.getId(); // 댓글 작성자 정보 조회
             return entityToDTO(reply, member);
         }).collect(Collectors.toList());
         //return  result.stream().map(reply -> entityToDTO(reply, Member.builder().build())).collect(Collectors.toList());
