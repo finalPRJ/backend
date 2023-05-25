@@ -33,12 +33,12 @@ public class BoardRepositoryTest {
 
         IntStream.rangeClosed(1,20).forEach(i->{
 
-            Member member = Member.builder().id("user"+i).build();
+            Member member = Member.builder().id(2L).build();
 
             Board board = Board.builder()
-                    .title("Title"+i)
-                    .content("Content"+i)
-                    .writer(member)
+                    .title("Title"+(i+520))
+                    .content("Content"+(i+520))
+                    .id(member)
                     .options1("")
                     .options2("")
                     .options3("")
@@ -57,7 +57,7 @@ public class BoardRepositoryTest {
         Board board = result.get();
 
         System.out.println(board);
-        System.out.println(board.getWriter());
+        System.out.println(board.getId());
     }
 
     @Test

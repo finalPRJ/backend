@@ -18,7 +18,7 @@ public class BoardServiceTest {
         BoardDTO dto = BoardDTO.builder()
                 .title("Test")
                 .content("Test 새로운 데이터")
-                .writerId("user20")
+                .id(1L)
                 .build();
         Integer bno = boardService.register(dto);
     }

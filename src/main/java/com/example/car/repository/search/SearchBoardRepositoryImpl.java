@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,20 +74,21 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
             String[] answer = type.split(":");          // ":" 중심으로 나눔 Ex. t:20  -> [0]=t / [1]=20
             String[] typeArr = answer[0].split("");     // 만약 다중 검색 조건 tw or tc라고 있을 경우 t , w 이런식으로 나눔
             BooleanBuilder conditionBuilder = new BooleanBuilder();
-
-            for (String t : typeArr) {
-                switch (t) {
-                    case "t":       //(테스트: 성공)
-                        conditionBuilder.or(board.title.contains(answer[1]));
-                        break;
-                    case "w":       //(테스트: 성공)
-                        conditionBuilder.or(member.name.contains(answer[1]));
-                        break;
-                    case "c":       //(테스트: 성공)
-                        conditionBuilder.or(board.content.contains(answer[1]));
-                        break;
+            if (answer.length > 1 && !StringUtils.isEmpty(answer[1])) {
+                for (String t : typeArr) {
+                    switch (t) {
+                        case "t":       //(테스트: 성공)
+                            conditionBuilder.or(board.title.contains(answer[1]));
+                            break;
+                        case "w":       //(테스트: 성공)
+                            conditionBuilder.or(member.name.contains(answer[1]));
+                            break;
+                        case "c":       //(테스트: 성공)
+                            conditionBuilder.or(board.content.contains(answer[1]));
+                            break;
+                    }
+                    booleanBuilder.and(conditionBuilder);
                 }
-                booleanBuilder.and(conditionBuilder);
             }
         }
 

@@ -16,22 +16,22 @@ public class ReplyRepositoryTest {
     @Autowired
     private ReplyRepository replyRepository;
 
-    @Test
-    public void insertReply() {
-        IntStream.rangeClosed(1,20).forEach(i->{
-            Integer bno = (int)(Math.random()*10)+1;
-
-            Board board = Board.builder().bno(bno).build();
-            Member member = Member.builder().id("user"+i).build();
-
-            Reply reply = Reply.builder()
-                    .content("Reply"+i)
-                    .board(board)
-                    .replyer(member)
-                    .build();
-            replyRepository.save(reply);
-        });
-    }
+//    @Test
+//    public void insertReply() {
+//        IntStream.rangeClosed(1,20).forEach(i->{
+//            Integer bno = (int)(Math.random()*10)+1;
+//
+//            Board board = Board.builder().bno(bno).build();
+//            Member member = Member.builder().id(1L).build();
+//
+//            Reply reply = Reply.builder()
+//                    .content("Reply"+i)
+//                    .board(board)
+//                    .replyer(member)
+//                    .build();
+//            replyRepository.save(reply);
+//        });
+//    }
 
     @Test
     @Transactional
