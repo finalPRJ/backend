@@ -62,7 +62,7 @@ public class BoardController {
     }
 
     @PostMapping("/modify")
-    public String modify(@RequestBody BoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
+    public ResponseEntity<Integer> modify(@RequestBody BoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
                          RedirectAttributes redirectAttributes) {
         log.info("post modify........................");
         log.info("dto: "+ dto);
@@ -74,6 +74,6 @@ public class BoardController {
 
 
         redirectAttributes.addAttribute("bno", dto.getBno());
-        return "redirect:/board/read";
+        return ResponseEntity.ok(dto.getBno());
     }
 }
