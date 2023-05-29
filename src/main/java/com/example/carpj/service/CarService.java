@@ -11,6 +11,7 @@ public interface CarService {
 
     // 목록화
     PageResultDTO<CarDTO, Car> getList(PageRequestDTO requestDTO);
+    String searchSentence(PageRequestDTO requestDTO); //검색어 만들기(유사한 차량 추천받기 위해)
 
     // dto 값을 entity로 변환
     default Car dtoToEntity(CarDTO dto) {

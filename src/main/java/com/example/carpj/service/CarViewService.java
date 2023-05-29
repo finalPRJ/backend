@@ -10,6 +10,7 @@ import java.util.List;
 public interface CarViewService {
     boolean register(CarViewDTO dto); //특정 항목 조회 값 DB에 저장
     List<CarViewDTO> rank(); //전체 조회수 순위
+    List<CarViewDTO> list(); //전체 데이터 목록(협업 필터링을 위한 데이터)
     
     //연령별 조회수 순위
     //국산/수입별 조회수 순위

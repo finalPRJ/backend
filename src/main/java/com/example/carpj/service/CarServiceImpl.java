@@ -352,4 +352,113 @@ public class CarServiceImpl implements CarService {
 
         return new PageResultDTO<>(result, fn);
     }
+
+    @Override
+    public String searchSentence(PageRequestDTO requestDTO) { //검색어 만들기(유사한 차량 추천받기 위해)
+        String sentence = ""; //검색어 만들 문장
+
+        String[] type = requestDTO.getType();
+        String[] mtype = requestDTO.getMtype();
+        String[] ktype = requestDTO.getKtype();
+        String[] ytype = requestDTO.getYtype();
+        String search = requestDTO.getSearch();
+
+        if((type == null || type[0].trim().length() == 0) && (search == null || search.trim().length() == 0) &&
+                (mtype == null || mtype[0].trim().length() == 0) && (ktype == null || ktype[0].trim().length() == 0)
+                && (ytype == null || ytype[0].trim().length() == 0)) {// 검색 조건이 없는 경우
+            return null;
+        }
+
+        if(type != null) {
+            for(int i =0; i< type.length; i++) {
+                sentence += type[i];
+                if(i < type.length-1)
+                    sentence += " ";
+            }
+        }
+
+        if (search != null) {
+            sentence = search;
+        }
+
+        if (mtype != null) {
+            int keyword1_1;
+            int keyword2_1;
+
+            if ("최소".equals(mtype[0])) {
+                keyword1_1=0;
+                keyword2_1 = Integer.parseInt(mtype[1]);
+            }
+            else if ("최대".equals(mtype[1])) {
+                keyword1_1 = Integer.parseInt(mtype[0]);
+                keyword2_1 = 100000000;
+            }
+            else {
+                keyword1_1 = Integer.parseInt(mtype[0]);
+                keyword2_1 = Integer.parseInt(mtype[1]);
+            }
+            int average = (keyword1_1+keyword2_1)/2;
+            if(sentenceCheck(sentence))
+                sentence += average;
+            else
+                sentence += " "+average;
+        }
+
+        if (ytype != null) {
+            int keyword1_1;
+            int keyword2_1;
+
+            if ("최소".equals(ytype[0])) {
+                keyword1_1 = 1989;
+                keyword2_1 = Integer.parseInt(ytype[1]);
+            }
+            else if ("최대".equals(ytype[1])) {
+                keyword1_1 = Integer.parseInt(ytype[0]);
+                keyword2_1 = 2024;
+            }
+            else {
+                keyword1_1 = Integer.parseInt(ytype[0]);
+                keyword2_1 = Integer.parseInt(ytype[1]);
+            }
+            int average = (keyword1_1+keyword2_1)/2;
+            if(sentenceCheck(sentence))
+                sentence += average;
+            else
+                sentence += " "+average;
+        }
+
+
+        if (ktype != null) {
+            int keyword1_1;
+            int keyword2_1;
+
+            if ("최소".equals(ktype[0])) {
+                keyword1_1=0;
+                keyword2_1 = Integer.parseInt(ktype[1]);
+            }
+            else if ("최대".equals(ktype[1])) {
+                keyword1_1 = Integer.parseInt(ktype[0]);
+                keyword2_1 = 2000000;
+            }
+            else {
+                keyword1_1 = Integer.parseInt(ktype[0]);
+                keyword2_1 = Integer.parseInt(ktype[1]);
+            }
+            int average = (keyword1_1+keyword2_1)/2;
+            if(sentenceCheck(sentence))
+                sentence += average;
+            else
+                sentence += " "+average;
+        }
+        return sentence;
+    }
+
+    private boolean sentenceCheck(String sentence) {
+        if(sentence.equals("")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

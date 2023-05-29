@@ -61,4 +61,23 @@ public class CarViewServiceImpl implements CarViewService{
             return null;
         }
     }
+
+    @Override
+    @Transactional
+    public List<CarViewDTO> list() { //전체 데이터 목록(협업 필터링을 위한 데이터)
+        try {
+            log.info("전체 데이터 목록-------------------");
+            List<CarView> entity = carViewRepository.findAll();
+            List<CarViewDTO> viewList = new ArrayList<>();
+
+            for(CarView carView : entity) {
+                CarViewDTO dto = entityToDTO(carView);
+                viewList.add(dto);
+            }
+            return viewList;
+        } catch(Exception e) {
+            log.info(e.getMessage());
+            return null;
+        }
+    }
 }
