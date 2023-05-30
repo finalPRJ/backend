@@ -1,20 +1,14 @@
 package com.example.carpj.controller;
 
+import com.example.carpj.dto.CarDicDTO;
 import com.example.carpj.dto.CarViewDTO;
 import com.example.carpj.service.CarViewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Log4j2
@@ -32,10 +26,26 @@ public class CarViewController {
         return result;
     }
 
-    @PostMapping("/rank") //전체 조회수 순위
-    public List<CarViewDTO> rank() {
+    @GetMapping("/rank") //전체 조회수 순위
+    public List<CarDicDTO> rank() {
         log.info("rank...");
-        List<CarViewDTO> rank = carViewService.rank();
+        List<CarDicDTO> rank = carViewService.rank();
+        System.out.println("rankResult----------- "+rank);
+        return rank;
+    }
+
+    @GetMapping("/sexRank") //성별 조회수 순위
+    public Map<String, List<CarDicDTO>> sexRank() {
+        log.info("sexRank...");
+        Map<String, List<CarDicDTO>> rank = carViewService.sexRank();
+        System.out.println("rankResult----------- "+rank);
+        return rank;
+    }
+
+    @GetMapping("/ageRank") //성별 조회수 순위
+    public Map<String, List<CarDicDTO>> ageRank() {
+        log.info("ageRank...");
+        Map<String, List<CarDicDTO>> rank = carViewService.ageRank();
         System.out.println("rankResult----------- "+rank);
         return rank;
     }
