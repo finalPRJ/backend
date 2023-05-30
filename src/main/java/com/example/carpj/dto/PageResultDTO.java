@@ -20,9 +20,10 @@ public class PageResultDTO<DTO, EN> {
 
     // 현재 페이지 번호
     private int page;
-
     // 목록 사이즈
     private int size;
+    // 게시판 사이즈
+    private int bsize;
 
     // 시작 페이지 번호, 끝 페이지 번호
     private int start, end;
@@ -33,7 +34,7 @@ public class PageResultDTO<DTO, EN> {
     // 페이지 번호 목록
     private List<Integer> pageList;
 
-    private List<Map<String, Object>> response;
+    private List<Map<String, Object>> response; //유사한 차량 결과 담기위한..
 
     public PageResultDTO(Page<EN> result, Function<EN, DTO> fn) {
         dtoList = result.stream().map(fn).collect(Collectors.toList());
@@ -46,6 +47,7 @@ public class PageResultDTO<DTO, EN> {
     private void makePageList(Pageable pageable){
         this.page = pageable.getPageNumber() + 1;
         this.size = pageable.getPageSize();
+        this.bsize = pageable.getPageSize();
 
         // temp and page
         int tempEnd = (int)(Math.ceil(page/10.0)) *10;
