@@ -111,7 +111,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                         .permitAll() //모든 사용자에게 허용
-                    .antMatchers("/auth/**", "/oauth2/**", "/recall/*", "/board/*", "/car/*", "/view/*", "/reco/*")
+                    .antMatchers("/auth/**", "/oauth2/**", "/recall/*", "/board/*", "/car/*", "/view/*", "/reco/*", "/replies/*")
                         .permitAll() //인증 없이 접근 가능 
                     .anyRequest() //나머지 경로는 인증 필요
                         .authenticated()
