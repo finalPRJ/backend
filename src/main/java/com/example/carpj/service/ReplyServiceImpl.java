@@ -35,8 +35,8 @@ public class ReplyServiceImpl implements ReplyService {
         List<Reply> result = replyRepository.getRepliesByBoardOrderByRno(Board.builder().bno(bno).build());
 
         return result.stream().map(reply -> {
-            Member member = reply.getReplyer(); // 댓글 작성자 정보 조회
-            return entityToDTO(reply, member);
+            Member member = reply.getId(); // 댓글 작성자 정보 조회
+            return entityToDTO(reply);
         }).collect(Collectors.toList());
         //return  result.stream().map(reply -> entityToDTO(reply, Member.builder().build())).collect(Collectors.toList());
     }
