@@ -53,6 +53,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         System.out.println("CustomOAuth2UserService---"+oAuth2User.getAttributes());
         System.out.println("CustomOAuth2UserService---"+oAuth2UserInfo.getName());
         System.out.println("CustomOAuth2UserService---"+oAuth2UserInfo.getImageUrl());
+        System.out.println("CustomOAuth2UserService---"+oAuth2UserInfo.getEmail());
         
         if(StringUtils.isEmpty(oAuth2UserInfo.getEmail())) { //이메일이 비어있는 경우
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
