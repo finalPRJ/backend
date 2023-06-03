@@ -27,54 +27,45 @@ public class CarRecoController {
 
     @PostMapping("/getSimilarCars") //사용자 맞춤 차량 추천 - 협업 필터링
     public List<CarDicDTO> personalReco(@RequestParam("id")Integer id) {
-        log.info("recommend...");
-        System.out.println("======================================"+id);
-        String url = "http://localhost:3030/personalReco";
-        //flask에 전달하기
-
-        List<CarViewDTO> viewData = carViewService.list();
-
-        Map<String, Object> payload = new HashMap<>();
-        payload.put("id", id);
-        payload.put("data", viewData);
-
-        //payload를 JSON 문자열로 변환
-        ObjectMapper objectMapper = new ObjectMapper();
-        String payloadJson;
         try {
-            payloadJson = objectMapper.writeValueAsString(payload);
-        } catch (JsonProcessingException e) {
-            //JSON 처리 예외 처리
+            log.info("recommend...");
+            System.out.println("======================================"+id);
+            String url = "http://localhost:3030/personalReco";
+            //flask에 전달하기
+
+            List<CarViewDTO> viewData = carViewService.list();
+
+            Map<String, Object> payload = new HashMap<>();
+            payload.put("id", id);
+            payload.put("data", viewData);
+
+            //payload를 JSON 문자열로 변환
+            ObjectMapper objectMapper = new ObjectMapper();
+            String payloadJson = objectMapper.writeValueAsString(payload);
+
+            //HTTP POST 요청을 사용하여 데이터 전송
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            //header와 payload로 HTTP entity 생성
+            HttpEntity<String> entity = new HttpEntity<>(payloadJson, headers);
+
+            //Flask 서버로 POST 요청 전송
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
+            String response = responseEntity.getBody();
+
+            List<Map<String, Object>> predictedDataList = objectMapper.readValue(response, new TypeReference<List<Map<String, Object>>>() {});
+            System.out.println("predictedDataList---"+predictedDataList);
+
+            //cdno에 맞는 정보들 가져오기
+            List<CarDicDTO> finalResultList = carDicService.getSimilarCars(predictedDataList);
+            System.out.println("finalResultList---"+finalResultList);
+
+            return finalResultList;
+        } catch(Exception e) {
             return null;
         }
 
-        //HTTP POST 요청을 사용하여 데이터 전송
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        //header와 payload로 HTTP entity 생성
-        HttpEntity<String> entity = new HttpEntity<>(payloadJson, headers);
-
-        //Flask 서버로 POST 요청 전송
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, entity, String.class);
-        HttpStatus statusCode = responseEntity.getStatusCode();
-        String response = responseEntity.getBody();
-
-        List<Map<String, Object>> predictedDataList = null;
-
-        try {
-            predictedDataList = objectMapper.readValue(response, new TypeReference<List<Map<String, Object>>>() {});
-        } catch (JsonProcessingException e) {
-            //JSON 처리 예외 처리
-            return null;
-        }
-        System.out.println("predictedDataList---"+predictedDataList);
-
-        //cdno에 맞는 정보들 가져오기
-        List<CarDicDTO> finalResultList = carDicService.getSimilarCars(predictedDataList);
-        System.out.println("finalResultList---"+finalResultList);
-
-        return finalResultList;
     }
 }
