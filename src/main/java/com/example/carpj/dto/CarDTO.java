@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 public class CarDTO {
-    private Integer cno;        // 번호 1,2,3~~~9999
+    private Long cno;        // 번호 1,2,3~~~9999
     private String platform;   // 중고차 플랫폼 Ex. kb차차차, kcar
     private String tag;         // 국산 / 수입 태그
     private String type;        // 차종
