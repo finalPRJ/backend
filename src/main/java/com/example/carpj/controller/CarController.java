@@ -43,19 +43,22 @@ public class CarController {
         System.out.println("==========================================="+sentence);
 
         if(sentence != null) { //검색어가 있을 경우에
-            String url = "http://localhost:3030/get_similar_cars?sentence='" + sentence+"'";
-            //flask에 전달하기
+            try {
+                String url = "http://localhost:3030/get_similar_cars?sentence='" + sentence + "'"; //flask에 전달하기
+                RestTemplate restTemplate = new RestTemplate();
+                String response = restTemplate.getForObject(url, String.class); //flask에서 모델 돌려서 비슷한 유형 차 top6 담아오기
 
-            RestTemplate restTemplate = new RestTemplate();
-            //flask에서 모델 돌려서 비슷한 유형 차 top6 담아오기
-            String response = restTemplate.getForObject(url, String.class);
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            List<Map<String, Object>> mapList = objectMapper.readValue(response, new TypeReference<List<Map<String, Object>>>() {});
-
-            carList.setResponse(mapList); //유사한 차량 결과도 담기
-            System.out.println("===========================================response: "+mapList);
-            //이 respone를 flask에서 값을 받아서 react로 전달
+                ObjectMapper objectMapper = new ObjectMapper();
+                List<Map<String, Object>> mapList = objectMapper.readValue(response, new TypeReference<List<Map<String, Object>>>() {});
+                carList.setResponse(mapList); //유사한 차량 결과도 담기
+                //이 respone를 flask에서 값을 받아서 react로 전달
+                System.out.println("===========================================response: " + mapList);
+            } catch (Exception e) {
+                // RestTemplate 예외 처리
+                // 예외 처리 로직 추가
+                log.error("RestTemplate Exception: " + e.getMessage());
+                // 예외 처리 결과를 ResponseEntity에 담아서 반환하거나, 다른 처리 방법을 선택
+            }
         }
 
         return new ResponseEntity<>(carList, HttpStatus.OK);

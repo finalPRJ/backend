@@ -4,6 +4,7 @@ import com.example.carpj.dto.CarDTO;
 import com.example.carpj.entity.Car;
 import com.example.carpj.dto.PageResultDTO;
 import com.example.carpj.dto.PageRequestDTO;
+import com.example.carpj.entity.CarDic;
 
 import javax.persistence.Column;
 
@@ -15,6 +16,7 @@ public interface CarService {
 
     // dto 값을 entity로 변환
     default Car dtoToEntity(CarDTO dto) {
+        CarDic carDic = CarDic.builder().cDNo(dto.getCDNo()).build();
         Car entity = Car.builder()
                 .cno(dto.getCno())
                 .platform(dto.getPlatform())
@@ -31,6 +33,7 @@ public interface CarService {
                 .region(dto.getRegion())
                 .link(dto.getLink())
                 .img(dto.getImg())
+                .cDNo(carDic)
                 .build();
         return entity;
     }
@@ -53,6 +56,7 @@ public interface CarService {
                 .region(entity.getRegion())
                 .link(entity.getLink())
                 .img(entity.getImg())
+                .cDNo(entity.getCDNo().getCDNo())
                 .build();
         return dto;
     }
